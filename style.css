@@ -267,6 +267,29 @@ body.light-mode .mode-toggle:hover {
   color: var(--color-light);
 }
 
+/* Sections */
+.section {
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 3rem;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
 /* Quiz Section */
 .quiz-container {
   background: rgba(188, 216, 147, 0.08);
@@ -537,6 +560,38 @@ body.light-mode .skin-tips {
 
 body.light-mode .tips-list li {
   border-bottom-color: rgba(7, 30, 7, 0.1);
+}
+
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+/* Loading animation */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.loading::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(188, 216, 147, 0.3);
+  border-top: 4px solid var(--color-medium);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive Design */
