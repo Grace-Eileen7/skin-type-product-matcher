@@ -3,10 +3,10 @@ function toggleMode() {
   document.body.classList.toggle("light-mode");
   const modeToggle = document.querySelector(".mode-toggle");
   if (document.body.classList.contains("light-mode")) {
-    modeToggle.textContent = "🌞";
+    modeToggle.textContent = "🌙";
     localStorage.setItem("theme", "light");
   } else {
-    modeToggle.textContent = "🌙";
+    modeToggle.textContent = "🌞";
     localStorage.setItem("theme", "dark");
   }
 }
@@ -158,4 +158,9 @@ function updateRoutineDisplay() {
         `
     )
     .join("");
+}
+
+function removeFromRoutine(productId) {
+  routineItems = routineItems.filter((item) => item.id !== productId);
+  updateRoutineDisplay();
 }
