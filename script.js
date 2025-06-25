@@ -50,24 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
   window.toggleMode = toggleMode;
 });
 
-function submitQuiz() {
-  if (Object.keys(quizAnswers).length < 3) {
-    alert("Please answer all questions before submitting.");
-    return;
-  }
-
-  // Show loading
-  const resultsElement = document.getElementById("quiz-results");
-  resultsElement.classList.remove("hidden");
-  resultsElement.innerHTML = '<div class="loading"></div>'; // <== this part shows the loader
-
-  // Simulate processing
-  setTimeout(() => {
-    const results = generateRecommendations(quizAnswers);
-    displayResults(results);
-  }, 2000);
-}
-
 // Quiz functionality
 let quizAnswers = {};
 
@@ -90,3 +72,21 @@ document.querySelectorAll(".option").forEach((option) => {
     quizAnswers[question] = value;
   });
 });
+
+function submitQuiz() {
+  if (Object.keys(quizAnswers).length < 3) {
+    alert("Please answer all questions before submitting.");
+    return;
+  }
+
+  // Show loading
+  const resultsElement = document.getElementById("quiz-results");
+  resultsElement.classList.remove("hidden");
+  resultsElement.innerHTML = '<div class="loading"></div>'; // <== this part shows the loader
+
+  // Simulate processing
+  setTimeout(() => {
+    const results = generateRecommendations(quizAnswers);
+    displayResults(results);
+  }, 2000);
+}
