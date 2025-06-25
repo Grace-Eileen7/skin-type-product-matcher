@@ -90,3 +90,41 @@ function submitQuiz() {
     displayResults(results);
   }, 2000);
 }
+
+function generateRecommendations(answers) {
+  const recommendations = {
+    acne: ["Gentle Green Cleanser", "Renewal Clay Mask"],
+    dryness: ["Hydrating Botanical Serum", "Nourishing Day Moisturizer"],
+    aging: ["Hydrating Botanical Serum", "Nourishing Day Moisturizer"],
+    sensitivity: ["Gentle Green Cleanser", "Hydrating Botanical Serum"],
+  };
+
+  return (
+    recommendations[answers["1"]] || [
+      "Gentle Green Cleanser",
+      "Nourishing Day Moisturizer",
+    ]
+  );
+}
+
+function displayResults(products) {
+  const resultsHtml = `
+            <div style="background: rgba(188, 216, 147, 0.1); padding: 2rem; border-radius: 15px; text-align: center;">
+                <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Your Personalized Recommendations</h3>
+                <p style="margin-bottom: 1.5rem;">Based on your quiz results, we recommend these products:</p>
+                <ul style="list-style: none; margin-bottom: 1.5rem;">
+                    ${products
+                      .map(
+                        (product) =>
+                          `<li style="padding: 0.5rem 0;">• ${product}</li>`
+                      )
+                      .join("")}
+                </ul>
+                <button onclick="scrollToProducts()" style="background: var(--color-medium); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 500;">
+                    View Products
+                </button>
+            </div>
+        `;
+
+  document.getElementById("quiz-results").innerHTML = resultsHtml;
+}
