@@ -3,107 +3,206 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Skin Care</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
-        <nav>
-            <div class="logo">Skin Type Genie</div>
-            <ul class="nav-links">
-                <li><a href="#products">Products</a></li>
-                <li><a href="#diagnostic">Diagnostic</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-            <button class="login-btn">Login</button>
-        </nav>
+      <nav>
+        <div class="logo">GlowUp!</div>
+        <ul class="nav-links">
+          <li><a href="#quiz">Skin Quiz</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#routine">My Routine</a></li>
+          <li><a href="#tips">Tips</a></li>
+        </ul>
+        <button class="login-btn">Login</button>
+      </nav>
     </header>
 
-    <button class="mode-toggle" id="modeToggle">🌙</button>
+    <button class="mode-toggle" onclick="toggleMode()">🌙</button>
 
     <main>
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero">
-                <h1>Discover Your Perfect Skincare</h1>
-                <p>Personalized recommendations for your unique skin type and concerns</p>
-            </section>
+      <div class="container">
+        <section class="hero">
+          <h1>Discover Your Perfect Skincare</h1>
+          <p>
+            Natural, sustainable skincare solutions tailored to your unique skin
+            needs. Experience the power of green beauty with our personalized
+            approach.
+          </p>
+        </section>
 
-            <!-- Diagnostic Section -->
-            <section id="diagnostic" class="section">
-                <h2>Skin Type Diagnostic</h2>
-                <div class="quiz-container">
-                    <div id="quiz">
-                        <div class="question">
-                            <h3>How does your skin typically feel after cleansing?</h3>
-                            <div class="question-options">
-                                <button class="option" data-value="dry">Tight and uncomfortable</button>
-                                <button class="option" data-value="oily">Still oily, especially in T-zone</button>
-                                <button class="option" data-value="combination">Dry in some areas, oily in others</button>
-                                <button class="option" data-value="sensitive">Irritated or red</button>
-                            </div>
-                        </div>
+        <section id="quiz" class="section">
+          <h2>Personalized Skin Quiz</h2>
+          <div class="quiz-container">
+            <div class="question">
+              <h3>What's your primary skin concern?</h3>
+              <div class="question-options">
+                <button class="option" data-question="1" data-value="acne">
+                  Acne & Breakouts
+                </button>
+                <button class="option" data-question="1" data-value="dryness">
+                  Dryness & Flakiness
+                </button>
+                <button class="option" data-question="1" data-value="aging">
+                  Fine Lines & Aging
+                </button>
+                <button
+                  class="option"
+                  data-question="1"
+                  data-value="sensitivity"
+                >
+                  Sensitivity & Redness
+                </button>
+              </div>
+            </div>
 
-                        <div class="question">
-                            <h3>How often do you experience breakouts?</h3>
-                            <div class="question-options">
-                                <button class="option" data-value="dry">Rarely, but skin feels tight</button>
-                                <button class="option" data-value="oily">Frequently, especially in T-zone</button>
-                                <button class="option" data-value="combination">Occasionally in oily areas</button>
-                                <button class="option" data-value="sensitive">Breakouts often come with irritation</button>
-                            </div>
-                        </div>
+            <div class="question">
+              <h3>How would you describe your skin type?</h3>
+              <div class="question-options">
+                <button class="option" data-question="2" data-value="oily">
+                  Oily
+                </button>
+                <button class="option" data-question="2" data-value="dry">
+                  Dry
+                </button>
+                <button
+                  class="option"
+                  data-question="2"
+                  data-value="combination"
+                >
+                  Combination
+                </button>
+                <button class="option" data-question="2" data-value="normal">
+                  Normal
+                </button>
+              </div>
+            </div>
 
-                        <div class="question">
-                            <h3>How does your skin react to new products?</h3>
-                            <div class="question-options">
-                                <button class="option" data-value="dry">Usually fine, but needs extra moisture</button>
-                                <button class="option" data-value="oily">Can handle most products well</button>
-                                <button class="option" data-value="combination">Varies by area of face</button>
-                                <button class="option" data-value="sensitive">Often causes redness or irritation</button>
-                            </div>
-                        </div>
+            <div class="question">
+              <h3>What's your current skincare routine like?</h3>
+              <div class="question-options">
+                <button class="option" data-question="3" data-value="minimal">
+                  Minimal (just cleanser)
+                </button>
+                <button class="option" data-question="3" data-value="basic">
+                  Basic (cleanser + moisturizer)
+                </button>
+                <button class="option" data-question="3" data-value="advanced">
+                  Advanced (multi-step routine)
+                </button>
+                <button class="option" data-question="3" data-value="none">
+                  No routine
+                </button>
+              </div>
+            </div>
 
-                        <button class="quiz-submit" id="submitQuiz">Discover My Skin Type</button>
-                    </div>
+            <button class="quiz-submit" onclick="submitQuiz()">
+              Get My Recommendations
+            </button>
+          </div>
 
-                    <div id="result" class="hidden">
-                        <h3>Your Skin Type: <span id="skinTypeResult"></span></h3>
-                        <div id="skinTips" class="skin-tips">
-                            <h4>Personalized Tips for Your Skin</h4>
-                            <ul class="tips-list" id="tipsList"></ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+          <div id="quiz-results" class="hidden">
+            <div class="loading"></div>
+          </div>
+        </section>
 
-            <!-- Products Section -->
-            <section id="products" class="section">
-                <h2>Recommended Products</h2>
-                <div id="productsContainer">
-                    <div class="loading" id="loading"></div>
-                    <div class="products-grid" id="productsGrid"></div>
-                </div>
-            </section>
+        <section id="products" class="section">
+          <h2>Our Green Collection</h2>
+          <div class="products-grid">
+            <div class="product-card" data-product="gentle-cleanser">
+              <div class="product-image">🌱</div>
+              <div class="product-info">
+                <h3 class="product-name">Gentle Green Cleanser</h3>
+                <p class="product-ingredients">
+                  Aloe Vera, Green Tea, Chamomile
+                </p>
+                <button class="add-to-routine" onclick="addToRoutine(this)">
+                  Add to Routine
+                </button>
+              </div>
+            </div>
 
-            <!-- My Routine Section -->
-            <section id="routine" class="section">
-                <h2>My Routine</h2>
-                <div class="routine-container">
-                    <div id="routineList">
-                        <p>Start your diagnostic to build your personalized routine!</p>
-                    </div>
-                </div>
-            </section>
+            <div class="product-card" data-product="hydrating-serum">
+              <div class="product-image">💧</div>
+              <div class="product-info">
+                <h3 class="product-name">Hydrating Botanical Serum</h3>
+                <p class="product-ingredients">
+                  Hyaluronic Acid, Rose Hip, Vitamin E
+                </p>
+                <button class="add-to-routine" onclick="addToRoutine(this)">
+                  Add to Routine
+                </button>
+              </div>
+            </div>
 
-            <!-- About Section -->
-            <section id="about" class="section">
-                <h2>About</h2>
-                <div class="quiz-container">
-                    <p>Our advanced skin diagnostic tool uses scientific principles to analyze your skin type and recommend products tailored specifically for your needs. Each recommendation is carefully curated based on your unique skin characteristics and concerns.</p>
-                    <br>
-                    <p>Whether you have dry, oily, combination, or sensitive skin, our expert system will guide you to the perfect skincare routine that works harmoniously with your skin's natural balance.</p>
-                </div>
-            </section>
-        </div>
+            <div class="product-card" data-product="nourishing-moisturizer">
+              <div class="product-image">🌿</div>
+              <div class="product-info">
+                <h3 class="product-name">Nourishing Day Moisturizer</h3>
+                <p class="product-ingredients">
+                  Shea Butter, Jojoba Oil, SPF 30
+                </p>
+                <button class="add-to-routine" onclick="addToRoutine(this)">
+                  Add to Routine
+                </button>
+              </div>
+            </div>
+
+            <div class="product-card" data-product="renewal-mask">
+              <div class="product-image">✨</div>
+              <div class="product-info">
+                <h3 class="product-name">Renewal Clay Mask</h3>
+                <p class="product-ingredients">
+                  French Clay, Spirulina, Cucumber
+                </p>
+                <button class="add-to-routine" onclick="addToRoutine(this)">
+                  Add to Routine
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="routine" class="section">
+          <h2>My Skincare Routine</h2>
+          <div class="routine-container">
+            <div id="routine-list">
+              <p style="text-align: center; opacity: 0.7; font-style: italic">
+                Your routine will appear here as you add products
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="tips" class="section">
+          <h2>Green Beauty Tips</h2>
+          <div class="skin-tips">
+            <ul class="tips-list">
+              <li>Always patch test new products on a small area first</li>
+              <li>
+                Use lukewarm water when cleansing to avoid stripping natural
+                oils
+              </li>
+              <li>Apply sunscreen daily, even on cloudy days</li>
+              <li>
+                Stay hydrated and eat antioxidant-rich foods for healthy skin
+              </li>
+              <li>Give new products 4-6 weeks to show results</li>
+              <li>
+                Sleep with a silk pillowcase to reduce friction and hair
+                breakage
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="script.js" defer></script>
   </body>
 </html>

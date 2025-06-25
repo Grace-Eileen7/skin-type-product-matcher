@@ -34,3 +34,109 @@ body.light-mode {
   background: linear-gradient(135deg, var(--color-light) 0%, #f8f9fa 100%);
   color: var(--color-text-dark);
 }
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(7, 30, 7, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(188, 216, 147, 0.1);
+}
+
+body.light-mode header {
+  background: rgba(248, 249, 250, 0.95);
+  border-bottom-color: rgba(7, 30, 7, 0.1);
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--color-light);
+}
+
+body.light-mode .logo {
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-light);
+  transition: width 0.3s ease;
+}
+
+body.light-mode .nav-links a::after {
+  background: var(--color-medium);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.login-btn {
+  background: transparent;
+  border: 2px solid var(--color-light);
+  color: var(--color-light);
+  padding: 0.8rem 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+}
+
+body.light-mode .login-btn {
+  border-color: var(--color-medium);
+  color: var(--color-medium);
+}
+
+.login-btn:hover {
+  background: var(--color-light);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(188, 216, 147, 0.3);
+}
+
+body.light-mode .login-btn:hover {
+  background: var(--color-medium);
+  color: white;
+  box-shadow: 0 8px 25px rgba(78, 104, 19, 0.3);
+}
