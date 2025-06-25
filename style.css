@@ -538,3 +538,56 @@ body.light-mode .skin-tips {
 body.light-mode .tips-list li {
   border-bottom-color: rgba(7, 30, 7, 0.1);
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .hero {
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-toggle {
+    right: 1rem;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .quiz-container,
+  .routine-container,
+  .skin-tips {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 0 1rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+
+  .login-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
