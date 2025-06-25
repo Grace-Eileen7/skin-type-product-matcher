@@ -497,3 +497,44 @@ body.light-mode .routine-item {
   background: #b91c1c;
   transform: scale(1.05);
 }
+
+/* Skin Tips */
+.skin-tips {
+  background: linear-gradient(
+    135deg,
+    rgba(78, 104, 19, 0.2),
+    rgba(110, 134, 73, 0.15)
+  );
+  padding: 3rem;
+  border-radius: 25px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(188, 216, 147, 0.2);
+}
+
+body.light-mode .skin-tips {
+  background: linear-gradient(
+    135deg,
+    rgba(188, 216, 147, 0.3),
+    rgba(248, 249, 250, 0.8)
+  );
+  border-color: rgba(7, 30, 7, 0.1);
+}
+
+.tips-list {
+  list-style: none;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tips-list li {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(188, 216, 147, 0.2);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+body.light-mode .tips-list li {
+  border-bottom-color: rgba(7, 30, 7, 0.1);
+}
