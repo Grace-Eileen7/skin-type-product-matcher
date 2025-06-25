@@ -449,3 +449,51 @@ body.light-mode .product-card {
 body.light-mode .add-to-routine:hover {
   color: var(--color-light);
 }
+
+/* My Routine */
+.routine-container {
+  background: rgba(188, 216, 147, 0.08);
+  padding: 3rem;
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(188, 216, 147, 0.15);
+}
+
+body.light-mode .routine-container {
+  background: rgba(7, 30, 7, 0.05);
+  border-color: rgba(7, 30, 7, 0.1);
+}
+
+.routine-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: rgba(188, 216, 147, 0.1);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(188, 216, 147, 0.2);
+}
+
+body.light-mode .routine-item {
+  background: rgba(7, 30, 7, 0.05);
+  border-color: rgba(7, 30, 7, 0.1);
+}
+
+.remove-btn {
+  background: #dc2626;
+  border: none;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.remove-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
