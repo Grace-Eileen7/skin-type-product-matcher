@@ -128,3 +128,34 @@ function displayResults(products) {
 
   document.getElementById("quiz-results").innerHTML = resultsHtml;
 }
+
+function scrollToProducts() {
+  document.getElementById("products").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
+
+function updateRoutineDisplay() {
+  const routineList = document.getElementById("routine-list");
+
+  if (routineItems.length === 0) {
+    routineList.innerHTML =
+      '<p style="text-align: center; opacity: 0.7; font-style: italic;">Your routine will appear here as you add products</p>';
+    return;
+  }
+
+  routineList.innerHTML = routineItems
+    .map(
+      (item) => `
+            <div class="routine-item" data-product="${item.id}">
+                <div>
+                    <h3 style="margin-bottom: 0.5rem;">${item.name}</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">${item.ingredients}</p>
+                </div>
+                <button class="remove-btn" onclick="removeFromRoutine('${item.id}')">Remove</button>
+            </div>
+        `
+    )
+    .join("");
+}
