@@ -1,0 +1,93 @@
+{
+  "products": [
+    {
+      "id": "gentle-cleanser",
+      "name": "Gentle Green Cleanser",
+      "description": "A mild, plant-based cleanser that removes impurities without stripping skin",
+      "ingredients": "Aloe Vera, Green Tea, Chamomile",
+      "price": 24.99,
+      "benefits": [
+        "Suitable for sensitive skin",
+        "pH balanced",
+        "Vegan formula"
+      ],
+      "bestFor": ["sensitivity", "acne", "normal"],
+      "emoji": "🌱"
+    },
+    {
+      "id": "hydrating-serum",
+      "name": "Hydrating Botanical Serum",
+      "description": "Intensely hydrating serum with plant-based humectants",
+      "ingredients": "Hyaluronic Acid, Rose Hip, Vitamin E",
+      "price": 34.99,
+      "benefits": ["Plumps fine lines", "Non-greasy", "Fast absorbing"],
+      "bestFor": ["dryness", "aging", "combination"],
+      "emoji": "💧"
+    },
+    {
+      "id": "nourishing-moisturizer",
+      "name": "Nourishing Day Moisturizer",
+      "description": "Daily moisturizer with natural SPF protection",
+      "ingredients": "Shea Butter, Jojoba Oil, SPF 30",
+      "price": 29.99,
+      "benefits": ["UV protection", "Lightweight", "Non-comedogenic"],
+      "bestFor": ["dryness", "aging", "normal"],
+      "emoji": "🌿"
+    },
+    {
+      "id": "renewal-mask",
+      "name": "Renewal Clay Mask",
+      "description": "Detoxifying mask that purifies and clarifies skin",
+      "ingredients": "French Clay, Spirulina, Cucumber",
+      "price": 27.99,
+      "benefits": ["Reduces shine", "Minimizes pores", "Soothes irritation"],
+      "bestFor": ["acne", "oily", "combination"],
+      "emoji": "✨"
+    }
+  ],
+  "skinTypes": [
+    {
+      "id": 1,
+      "type": "oily",
+      "description": "Excess sebum production, shiny appearance, prone to acne",
+      "recommendations": ["gentle-cleanser", "renewal-mask"]
+    },
+    {
+      "id": 2,
+      "type": "dry",
+      "description": "Tight feeling, flakiness, rough texture",
+      "recommendations": ["hydrating-serum", "nourishing-moisturizer"]
+    }
+  ],
+  "concerns": [
+    {
+      "id": 1,
+      "type": "acne",
+      "recommendations": ["gentle-cleanser", "renewal-mask"],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "dryness",
+      "recommendations": ["hydrating-serum", "nourishing-moisturizer"],
+      "tips": [
+        "Apply products to damp skin",
+        "Use lukewarm water when cleansing"
+      ]
+    }
+  ],
+  "tips": [
+    {
+      "id": 1,
+      "content": "Always patch test new products on a small area first"
+    },
+    {
+      "id": 2,
+      "content": "Use lukewarm water when cleansing to avoid stripping natural oils"
+    }
+  ],
+  "users": []
+}
