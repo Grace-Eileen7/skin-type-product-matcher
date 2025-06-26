@@ -11,7 +11,7 @@
         "pH balanced",
         "Vegan formula"
       ],
-      "bestFor": ["sensitivity", "acne", "normal"],
+      "bestFor": ["sensitive", "acne", "normal", "combination"],
       "emoji": "🌱"
     },
     {
@@ -21,7 +21,7 @@
       "ingredients": "Hyaluronic Acid, Rose Hip, Vitamin E",
       "price": 34.99,
       "benefits": ["Plumps fine lines", "Non-greasy", "Fast absorbing"],
-      "bestFor": ["dryness", "aging", "combination"],
+      "bestFor": ["dry", "aging", "combination", "normal"],
       "emoji": "💧"
     },
     {
@@ -31,7 +31,7 @@
       "ingredients": "Shea Butter, Jojoba Oil, SPF 30",
       "price": 29.99,
       "benefits": ["UV protection", "Lightweight", "Non-comedogenic"],
-      "bestFor": ["dryness", "aging", "normal"],
+      "bestFor": ["dry", "aging", "normal", "sensitive"],
       "emoji": "🌿"
     },
     {
@@ -41,8 +41,18 @@
       "ingredients": "French Clay, Spirulina, Cucumber",
       "price": 27.99,
       "benefits": ["Reduces shine", "Minimizes pores", "Soothes irritation"],
-      "bestFor": ["acne", "oily", "combination"],
+      "bestFor": ["oily", "combination", "acne"],
       "emoji": "✨"
+    },
+    {
+      "id": "balancing-toner",
+      "name": "Balancing Herbal Toner",
+      "description": "Alcohol-free toner that restores skin's pH balance",
+      "ingredients": "Witch Hazel, Lavender, Peppermint",
+      "price": 22.99,
+      "benefits": ["Reduces redness", "Controls oil", "Refreshes skin"],
+      "bestFor": ["oily", "combination", "acne"],
+      "emoji": "🍃"
     }
   ],
   "skinTypes": [
@@ -50,20 +60,46 @@
       "id": 1,
       "type": "oily",
       "description": "Excess sebum production, shiny appearance, prone to acne",
-      "recommendations": ["gentle-cleanser", "renewal-mask"]
+      "recommendations": ["gel-cleanser", "renewal-mask", "balancing-toner"]
     },
     {
       "id": 2,
       "type": "dry",
       "description": "Tight feeling, flakiness, rough texture",
-      "recommendations": ["hydrating-serum", "nourishing-moisturizer"]
+      "recommendations": ["hydrating-serum", "ceramide-moisturizer"]
+    },
+    {
+      "id": 3,
+      "type": "combination",
+      "description": "Oily in T-zone, dry/normal elsewhere",
+      "recommendations": [
+        "forming-cleanser",
+        "hydrating-serum",
+        "balancing-toner"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "normal",
+      "description": "Balanced skin with few concerns",
+      "recommendations": ["gentle-cleanser", "nourishing-moisturizer"]
+    },
+    {
+      "id": 5,
+      "type": "sensitive",
+      "description": "Easily irritated, prone to redness",
+      "recommendations": ["gentle-cleanser", "deep-moisturizer"]
     }
   ],
   "concerns": [
     {
       "id": 1,
       "type": "acne",
-      "recommendations": ["gentle-cleanser", "renewal-mask"],
+      "recommendations": [
+        "forming-cleanser",
+        "renewal-mask",
+        "balancing-toner"
+      ],
       "tips": [
         "Avoid touching your face throughout the day",
         "Change pillowcases regularly"
@@ -77,6 +113,21 @@
         "Apply products to damp skin",
         "Use lukewarm water when cleansing"
       ]
+    },
+    {
+      "id": 3,
+      "type": "aging",
+      "recommendations": ["antiaging-serum", "reviving-moisturizer"],
+      "tips": ["Always use SPF during the day", "Incorporate retinol gradually"]
+    },
+    {
+      "id": 4,
+      "type": "sensitivity",
+      "recommendations": ["gentle-cleanser", "calming-moisturizer"],
+      "tips": [
+        "Patch test new products",
+        "Avoid products with alcohol or fragrance"
+      ]
     }
   ],
   "tips": [
@@ -87,6 +138,14 @@
     {
       "id": 2,
       "content": "Use lukewarm water when cleansing to avoid stripping natural oils"
+    },
+    {
+      "id": 3,
+      "content": "Apply sunscreen daily, even on cloudy days"
+    },
+    {
+      "id": 4,
+      "content": "Stay hydrated and eat antioxidant-rich foods for healthy skin"
     }
   ],
   "users": []
