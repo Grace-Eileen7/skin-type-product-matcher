@@ -130,7 +130,7 @@ Open the `index.html` file in your browser, or use VS Code’s Live Server exten
 
 Each skincare product in `db.json` includes:
 
-````json
+```json
 {
   "id": 1,
   "name": "Gentle Hydrating Cleanser",
@@ -139,13 +139,12 @@ Each skincare product in `db.json` includes:
   "compatibleSkinTypes": ["dry", "sensitive"],
   "purpose": "Hydrating and cleansing the skin"
 }
-
+```
 
 ### 🔸 2. **Skin Type Quiz Flow**
 
 **✅ Action**: Add a **Quiz Flow** subsection:
 
-```markdown
 ## 🧪 Skin Type Quiz Flow
 
 Users answer 2–3 fun multiple-choice questions like:
@@ -157,8 +156,6 @@ Users answer 2–3 fun multiple-choice questions like:
 Based on their answers, the app detects a skin type:
 ➡️ `dry`, `oily`, `combination`, or `sensitive`
 …and filters product recommendations accordingly and beauty tips.
-
-
 
 ## 🚀 Stretch Goals Implemented
 
@@ -177,4 +174,7 @@ Based on their answers, the app detects a skin type:
 ## 📝 License
 
 This project is licensed under the [MIT License](LICENSE).
-````
+
+```
+
+```
