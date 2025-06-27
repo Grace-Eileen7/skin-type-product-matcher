@@ -100,11 +100,14 @@ async function submitQuiz() {
   const beautyTips = generateBeautyTips(quizAnswers);
 
   try {
-    const response = await fetch("http://localhost:3001/tips", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: beautyTips,
-    });
+    const response = await fetch(
+      "https://skin-type-product-matcher-json-api.onrender.com/tips",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: beautyTips,
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to save");
     console.log("Saved to tips!");
@@ -255,16 +258,19 @@ async function addToRoutine(button) {
   }
 
   try {
-    const response = await fetch("http://localhost:3001/routines", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        productId: product.productId,
-        ingredients: product.ingredients,
-        name: product.name,
-        addedAt: new Date().toISOString(),
-      }),
-    });
+    const response = await fetch(
+      "https://skin-type-product-matcher-json-api.onrender.com/routines",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: product.productId,
+          ingredients: product.ingredients,
+          name: product.name,
+          addedAt: new Date().toISOString(),
+        }),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to save");
     console.log("Saved to routine!");
@@ -378,7 +384,9 @@ async function fetchDBData() {
 
 async function loadRoutine() {
   try {
-    const response = await fetch("http://localhost:3001/routines");
+    const response = await fetch(
+      "https://skin-type-product-matcher-json-api.onrender.com/routines"
+    );
     const savedRoutine = await response.json();
     routineProducts = savedRoutine;
     updateRoutineDisplay(savedRoutine);
@@ -389,7 +397,9 @@ async function loadRoutine() {
 
 async function loadTips() {
   try {
-    const response = await fetch("http://localhost:3001/tips");
+    const response = await fetch(
+      "https://skin-type-product-matcher-json-api.onrender.com/tips"
+    );
     console.log(response);
 
     const savedTips = await response.json();
@@ -402,15 +412,20 @@ async function loadTips() {
 }
 
 async function deleteFromServer(productId) {
-  await fetch(`http://localhost:3001/routines/${productId}`, {
-    method: "DELETE",
-  });
+  await fetch(
+    `https://skin-type-product-matcher-json-api.onrender.com/routines/${productId}`,
+    {
+      method: "DELETE",
+    }
+  );
   await loadRoutineFromServer();
 }
 
 // Case 2: Fetched from json-server
 async function loadRoutineFromServer() {
-  const response = await fetch("http://localhost:3001/routines");
+  const response = await fetch(
+    "https://skin-type-product-matcher-json-api.onrender.com/routines"
+  );
   const serverProducts = await response.json();
   updateRoutineDisplay(serverProducts);
 }
