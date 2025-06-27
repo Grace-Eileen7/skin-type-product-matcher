@@ -646,3 +646,65 @@ body.light-mode .tips-list li {
     font-size: 0.85rem;
   }
 }
+
+/*Routine CSS*/
+.routine-product {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  position: relative;
+
+  /* Light mode defaults */
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  /* Smooth transition for theme changes */
+  transition: all 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .routine-product {
+    /* Dark mode styling */
+    background: rgba(40, 40, 40, 0.7);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+.routine-product-emoji {
+  font-size: 24px;
+}
+
+.routine-product-info {
+  flex-grow: 1;
+}
+
+.routine-product-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+
+.routine-product-ingredients {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.remove-from-routine {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+  padding: 0 8px;
+}
+
+.remove-from-routine:hover {
+  color: #ff4444;
+}
+/*Routine CSS*/

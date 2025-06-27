@@ -11,7 +11,12 @@
         "pH balanced",
         "Vegan formula"
       ],
-      "bestFor": ["sensitive", "acne", "normal", "combination"],
+      "bestFor": [
+        "sensitive",
+        "acne",
+        "normal",
+        "combination"
+      ],
       "emoji": "🌱"
     },
     {
@@ -20,8 +25,17 @@
       "description": "Intensely hydrating serum with plant-based humectants",
       "ingredients": "Hyaluronic Acid, Rose Hip, Vitamin E",
       "price": 34.99,
-      "benefits": ["Plumps fine lines", "Non-greasy", "Fast absorbing"],
-      "bestFor": ["dry", "aging", "combination", "normal"],
+      "benefits": [
+        "Plumps fine lines",
+        "Non-greasy",
+        "Fast absorbing"
+      ],
+      "bestFor": [
+        "dry",
+        "aging",
+        "combination",
+        "normal"
+      ],
       "emoji": "💧"
     },
     {
@@ -30,8 +44,17 @@
       "description": "Daily moisturizer with natural SPF protection",
       "ingredients": "Shea Butter, Jojoba Oil, SPF 30",
       "price": 29.99,
-      "benefits": ["UV protection", "Lightweight", "Non-comedogenic"],
-      "bestFor": ["dry", "aging", "normal", "sensitive"],
+      "benefits": [
+        "UV protection",
+        "Lightweight",
+        "Non-comedogenic"
+      ],
+      "bestFor": [
+        "dry",
+        "aging",
+        "normal",
+        "sensitive"
+      ],
       "emoji": "🌿"
     },
     {
@@ -40,8 +63,16 @@
       "description": "Detoxifying mask that purifies and clarifies skin",
       "ingredients": "French Clay, Spirulina, Cucumber",
       "price": 27.99,
-      "benefits": ["Reduces shine", "Minimizes pores", "Soothes irritation"],
-      "bestFor": ["oily", "combination", "acne"],
+      "benefits": [
+        "Reduces shine",
+        "Minimizes pores",
+        "Soothes irritation"
+      ],
+      "bestFor": [
+        "oily",
+        "combination",
+        "acne"
+      ],
       "emoji": "✨"
     },
     {
@@ -50,26 +81,41 @@
       "description": "Alcohol-free toner that restores skin's pH balance",
       "ingredients": "Witch Hazel, Lavender, Peppermint",
       "price": 22.99,
-      "benefits": ["Reduces redness", "Controls oil", "Refreshes skin"],
-      "bestFor": ["oily", "combination", "acne"],
+      "benefits": [
+        "Reduces redness",
+        "Controls oil",
+        "Refreshes skin"
+      ],
+      "bestFor": [
+        "oily",
+        "combination",
+        "acne"
+      ],
       "emoji": "🍃"
     }
   ],
   "skinTypes": [
     {
-      "id": 1,
+      "id": "1",
       "type": "oily",
       "description": "Excess sebum production, shiny appearance, prone to acne",
-      "recommendations": ["gel-cleanser", "renewal-mask", "balancing-toner"]
+      "recommendations": [
+        "gel-cleanser",
+        "renewal-mask",
+        "balancing-toner"
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "type": "dry",
       "description": "Tight feeling, flakiness, rough texture",
-      "recommendations": ["hydrating-serum", "ceramide-moisturizer"]
+      "recommendations": [
+        "hydrating-serum",
+        "ceramide-moisturizer"
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "type": "combination",
       "description": "Oily in T-zone, dry/normal elsewhere",
       "recommendations": [
@@ -79,21 +125,27 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "type": "normal",
       "description": "Balanced skin with few concerns",
-      "recommendations": ["gentle-cleanser", "nourishing-moisturizer"]
+      "recommendations": [
+        "gentle-cleanser",
+        "nourishing-moisturizer"
+      ]
     },
     {
-      "id": 5,
+      "id": "5",
       "type": "sensitive",
       "description": "Easily irritated, prone to redness",
-      "recommendations": ["gentle-cleanser", "deep-moisturizer"]
+      "recommendations": [
+        "gentle-cleanser",
+        "deep-moisturizer"
+      ]
     }
   ],
   "concerns": [
     {
-      "id": 1,
+      "id": "1",
       "type": "acne",
       "recommendations": [
         "forming-cleanser",
@@ -106,24 +158,36 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "type": "dryness",
-      "recommendations": ["hydrating-serum", "nourishing-moisturizer"],
+      "recommendations": [
+        "hydrating-serum",
+        "nourishing-moisturizer"
+      ],
       "tips": [
         "Apply products to damp skin",
         "Use lukewarm water when cleansing"
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "type": "aging",
-      "recommendations": ["antiaging-serum", "reviving-moisturizer"],
-      "tips": ["Always use SPF during the day", "Incorporate retinol gradually"]
+      "recommendations": [
+        "antiaging-serum",
+        "reviving-moisturizer"
+      ],
+      "tips": [
+        "Always use SPF during the day",
+        "Incorporate retinol gradually"
+      ]
     },
     {
-      "id": 4,
+      "id": "4",
       "type": "sensitivity",
-      "recommendations": ["gentle-cleanser", "calming-moisturizer"],
+      "recommendations": [
+        "gentle-cleanser",
+        "calming-moisturizer"
+      ],
       "tips": [
         "Patch test new products",
         "Avoid products with alcohol or fragrance"
@@ -132,21 +196,248 @@
   ],
   "tips": [
     {
-      "id": 1,
-      "content": "Always patch test new products on a small area first"
+      "id": "dd39",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
     },
     {
-      "id": 2,
-      "content": "Use lukewarm water when cleansing to avoid stripping natural oils"
+      "id": "743e",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
     },
     {
-      "id": 3,
-      "content": "Apply sunscreen daily, even on cloudy days"
+      "id": "07da",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
     },
     {
-      "id": 4,
-      "content": "Stay hydrated and eat antioxidant-rich foods for healthy skin"
+      "id": "8fb0",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": "cdf1",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": "c757",
+      "recommendations": [
+        {
+          "id": "antiaging-serum",
+          "name": "antiaging-serum"
+        },
+        {
+          "id": "reviving-moisturizer",
+          "name": "reviving-moisturizer"
+        }
+      ],
+      "tips": [
+        "Always use SPF during the day",
+        "Incorporate retinol gradually"
+      ]
+    },
+    {
+      "id": "2f2a",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": "e2fa",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": "296e",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": "1fa6",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
+    },
+    {
+      "id": "3590",
+      "recommendations": [
+        {
+          "id": "forming-cleanser",
+          "name": "forming-cleanser"
+        },
+        {
+          "id": "renewal-mask",
+          "name": "Renewal Clay Mask"
+        },
+        {
+          "id": "balancing-toner",
+          "name": "balancing-toner"
+        }
+      ],
+      "tips": [
+        "Avoid touching your face throughout the day",
+        "Change pillowcases regularly"
+      ]
     }
   ],
-  "users": []
+  "users": [],
+  "routines": [
+    {
+      "id": "398f",
+      "productId": "gentle-cleanser",
+      "ingredients": "Aloe Vera, Green Tea, Chamomile",
+      "name": "Gentle Green Cleanser",
+      "addedAt": "2025-06-27T00:59:59.129Z"
+    },
+    {
+      "id": "f0c1",
+      "productId": "nourishing-moisturizer",
+      "ingredients": "Shea Butter, Jojoba Oil, SPF 30",
+      "name": "Nourishing Day Moisturizer",
+      "addedAt": "2025-06-27T01:00:02.998Z"
+    }
+  ]
 }

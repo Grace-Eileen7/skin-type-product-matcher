@@ -21,7 +21,9 @@ function checkTheme() {
 }
 
 // Scroll animation
-function checkVisibility() {
+function checkVisibility(e) {
+  if (e) e.preventDefault();
+
   const sections = document.querySelectorAll(".section");
   const windowHeight = window.innerHeight;
 
@@ -35,9 +37,14 @@ function checkVisibility() {
 }
 
 // Initialize
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   checkTheme();
   checkVisibility();
+  // Fetch data from db.json
+  fetchDBData().then(async (data) => {
+    await loadRoutine();
+    await loadTips();
+  });
 
   // Set up event listeners
   window.addEventListener("scroll", checkVisibility);
@@ -52,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Quiz functionality
 let quizAnswers = {};
+let routineProducts = [];
+let allDbData = "";
 
 document.querySelectorAll(".option").forEach((option) => {
   option.addEventListener("click", function () {
@@ -73,7 +82,7 @@ document.querySelectorAll(".option").forEach((option) => {
   });
 });
 
-function submitQuiz() {
+async function submitQuiz() {
   if (Object.keys(quizAnswers).length < 3) {
     alert("Please answer all questions before submitting.");
     return;
@@ -85,10 +94,25 @@ function submitQuiz() {
   resultsElement.innerHTML = '<div class="loading"></div>'; // <== this part shows the loader
 
   // Simulate processing
-  setTimeout(() => {
-    const results = generateRecommendations(quizAnswers);
-    displayResults(results);
-  }, 2000);
+  const results = generateRecommendations(quizAnswers);
+  displayResults(results);
+
+  const beautyTips = generateBeautyTips(quizAnswers);
+
+  try {
+    const response = await fetch("http://localhost:3001/tips", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: beautyTips,
+    });
+
+    if (!response.ok) throw new Error("Failed to save");
+    console.log("Saved to tips!");
+  } catch (error) {
+    console.error("Error saving tips:", error);
+  }
+
+  displayBeautyTips(beautyTips);
 }
 
 function generateRecommendations(answers) {
@@ -105,6 +129,46 @@ function generateRecommendations(answers) {
       "Nourishing Day Moisturizer",
     ]
   );
+}
+
+function generateBeautyTips(answers) {
+  const primaryConcern = answers["1"];
+  const matchedConcern = allDbData?.concerns.find((c) => {
+    return c.type === primaryConcern;
+  });
+
+  if (!matchedConcern) {
+    return {
+      recommendations: ["Gentle Green Cleanser", "Nourishing Day Moisturizer"],
+      tips: [
+        "Cleanse your face twice daily",
+        "Always apply moisturizer to damp skin",
+        "Use SPF daily",
+      ],
+    };
+  }
+
+  console.log("concern");
+  console.log(matchedConcern);
+
+  return {
+    recommendations: matchedConcern.recommendations.map((rec) => ({
+      id: rec,
+      name: getProductDisplayName(rec),
+    })),
+    tips: matchedConcern.tips,
+  };
+}
+
+// Helper function to map product IDs to display names
+function getProductDisplayName(productId) {
+  const productNames = {
+    "gentle-cleanser": "Gentle Green Cleanser",
+    "renewal-mask": "Renewal Clay Mask",
+    "hydrating-serum": "Hydrating Botanical Serum",
+    "nourishing-moisturizer": "Nourishing Day Moisturizer",
+  };
+  return productNames[productId] || productId;
 }
 
 function displayResults(products) {
@@ -129,6 +193,41 @@ function displayResults(products) {
   document.getElementById("quiz-results").innerHTML = resultsHtml;
 }
 
+function displayBeautyTips(response) {
+  const tips = response?.tips || response?.tips || [];
+
+  console.log(tips);
+
+  document.getElementById("tips").innerHTML = `
+    <div style="background: rgba(188, 216, 147, 0.1); padding: 2rem; border-radius: 15px; text-align: center;">
+      <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Your Personalized Beauty Tips</h3>
+      <p style="margin-bottom: 1.5rem;">Based on your skin concerns, follow these recommendations:</p>
+      <ul style="list-style: none; margin-bottom: 1.5rem; text-align: left; padding-left: 1rem;">
+        ${tips
+          .map(
+            (tip) => `
+          <li style="padding: 0.5rem 0; position: relative; padding-left: 1.5rem;">
+            <span style="position: absolute; left: 0;">•</span> ${tip}
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+      ${
+        tips.length > 0
+          ? `
+        <button onclick="scrollToProducts()" style="background: var(--color-medium); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 500; margin-top: 1rem;">
+          View Recommended Products
+        </button>
+      `
+          : `
+        <p style="font-style: italic; opacity: 0.7;">No specific tips available for your current profile</p>
+      `
+      }
+    </div>
+  `;
+}
+
 function scrollToProducts() {
   document.getElementById("products").scrollIntoView({
     behavior: "smooth",
@@ -136,31 +235,182 @@ function scrollToProducts() {
   });
 }
 
-function updateRoutineDisplay() {
-  const routineList = document.getElementById("routine-list");
+async function addToRoutine(button) {
+  const productCard = button.closest(".product-card");
 
-  if (routineItems.length === 0) {
-    routineList.innerHTML =
-      '<p style="text-align: center; opacity: 0.7; font-style: italic;">Your routine will appear here as you add products</p>';
+  const product = {
+    productId: productCard.dataset.product,
+    name: productCard.querySelector(".product-name").textContent,
+    ingredients: productCard
+      .querySelector(".product-ingredients")
+      .textContent.trim(),
+    emoji: productCard.querySelector(".product-image").textContent,
+  };
+
+  // Check if product already exists in routine
+  const exists = routineProducts.some((p) => p.productId === product.productId);
+  if (exists) {
+    alert("This product is already in your routine!");
     return;
   }
 
-  routineList.innerHTML = routineItems
-    .map(
-      (item) => `
-            <div class="routine-item" data-product="${item.id}">
-                <div>
-                    <h3 style="margin-bottom: 0.5rem;">${item.name}</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">${item.ingredients}</p>
-                </div>
-                <button class="remove-btn" onclick="removeFromRoutine('${item.id}')">Remove</button>
-            </div>
-        `
-    )
-    .join("");
+  try {
+    const response = await fetch("http://localhost:3001/routines", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        productId: product.productId,
+        ingredients: product.ingredients,
+        name: product.name,
+        addedAt: new Date().toISOString(),
+      }),
+    });
+
+    if (!response.ok) throw new Error("Failed to save");
+    console.log("Saved to routine!");
+    await loadRoutine();
+  } catch (error) {
+    console.error("Error saving routine:", error);
+  }
+
+  // Update the routine display
+  // updateRoutineDisplay();
+
+  // Update button state
+  button.textContent = "Added!";
+  button.disabled = true;
 }
 
-function removeFromRoutine(productId) {
-  routineItems = routineItems.filter((item) => item.id !== productId);
-  updateRoutineDisplay();
+function updateRoutineDisplay(productsArray) {
+  console.log("productsArray");
+  console.log(productsArray);
+  const routineList = document.getElementById("routine-list");
+  const productsToDisplay = productsArray || routineProducts;
+
+  if (productsToDisplay.length === 0) {
+    routineList.innerHTML = `
+      <p style="text-align: center; opacity: 0.7; font-style: italic">
+        Your routine will appear here as you add products
+      </p>
+    `;
+    return;
+  }
+
+  // Create HTML for each product
+  routineList.innerHTML = productsToDisplay
+    .map(
+      (product) => `
+    <div class="routine-product" data-product-id="${product.id}">
+      <div class="routine-product-id">${product.productId}</div>
+      <div class="routine-product-emoji">${product.emoji || "✨"}</div>
+      <div class="routine-product-info">
+        <h4>${product.name}</h4>
+        ${
+          product.ingredients
+            ? `<p class="routine-product-ingredients">${product.ingredients}</p>`
+            : ""
+        }
+      </div>
+      <button class="remove-from-routine">
+        ×
+      </button>
+    </div>
+  `
+    )
+    .join("");
+
+  // Add event listeners for remove buttons
+  routineList.querySelectorAll(".remove-from-routine").forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = button.closest(".routine-product").dataset.productId;
+
+      removeFromRoutine(productId).then((r) => {
+        deleteFromServer(productId).then((r) => console.log(r));
+      });
+    });
+  });
+}
+
+async function removeFromRoutine(productId) {
+  try {
+    routineProducts = routineProducts.filter((product) => {
+      return product.id != productId;
+    });
+    updateRoutineDisplay();
+
+    await deleteFromServer(productId);
+
+    const allProductCards = document.querySelectorAll(".product-card");
+
+    console.log("::::::allProductCards");
+    console.log(allProductCards);
+    allProductCards.forEach((card) => {
+      if (card.dataset.product == productId) {
+        const addButton = card.querySelector(".add-to-routine");
+        console.log(":::::::addButton");
+        console.log(addButton);
+        if (addButton) {
+          addButton.textContent = "Add to Routine";
+          addButton.disabled = false;
+        }
+      }
+    });
+  } catch (error) {
+    console.error("Error removing product:", error);
+    // Revert UI if needed
+    loadRoutine();
+  }
+}
+
+async function fetchDBData() {
+  try {
+    const response = await fetch("db.json");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    allDbData = data;
+    console.log("All DB data loaded:", allDbData);
+  } catch (error) {
+    console.error("Error loading data:", error);
+  }
+}
+
+async function loadRoutine() {
+  try {
+    const response = await fetch("http://localhost:3001/routines");
+    const savedRoutine = await response.json();
+    routineProducts = savedRoutine;
+    updateRoutineDisplay(savedRoutine);
+  } catch (error) {
+    console.error("Error loading routine:", error);
+  }
+}
+
+async function loadTips() {
+  try {
+    const response = await fetch("http://localhost:3001/tips");
+    console.log(response);
+
+    const savedTips = await response.json();
+    console.log(savedTips);
+
+    displayBeautyTips(savedTips); // Use savedTips, not raw response
+  } catch (error) {
+    console.error("Error loading tips:", error);
+  }
+}
+
+async function deleteFromServer(productId) {
+  await fetch(`http://localhost:3001/routines/${productId}`, {
+    method: "DELETE",
+  });
+  await loadRoutineFromServer();
+}
+
+// Case 2: Fetched from json-server
+async function loadRoutineFromServer() {
+  const response = await fetch("http://localhost:3001/routines");
+  const serverProducts = await response.json();
+  updateRoutineDisplay(serverProducts);
 }
