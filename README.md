@@ -141,7 +141,7 @@ Each skincare product in `db.json` includes:
 }
 ```
 
-### 🔸 2. **Skin Type Quiz Flow**
+### 🔸 **Skin Type Quiz Flow**
 
 **✅ Action**: Add a **Quiz Flow** subsection:
 
@@ -174,7 +174,3 @@ Based on their answers, the app detects a skin type:
 ## 📝 License
 
 This project is licensed under the [MIT License](LICENSE).
-
-```
-
-```
