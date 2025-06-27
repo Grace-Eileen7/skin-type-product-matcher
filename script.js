@@ -1,55 +1,78 @@
 // Dark/light mode toggle
 function toggleMode() {
+  // Toggle 'light-mode' class on body element
   document.body.classList.toggle("light-mode");
+
+  // Get the mode toggle button element
   const modeToggle = document.querySelector(".mode-toggle");
+
+  // Check if light mode is currently active
   if (document.body.classList.contains("light-mode")) {
+    // Update button to moon icon (indicating switch to dark mode)
     modeToggle.textContent = "🌙";
+    // Save theme preference to localStorage
     localStorage.setItem("theme", "light");
   } else {
+    // Update button to sun icon (indicating switch to light mode)
     modeToggle.textContent = "🌞";
+    // Save theme preference to localStorage
     localStorage.setItem("theme", "dark");
   }
 }
 
 // Check for saved theme preference
 function checkTheme() {
+  // Retrieve saved theme from localStorage
   const savedTheme = localStorage.getItem("theme");
+
+  // If light theme was saved
   if (savedTheme === "light") {
+    // Apply light mode classes
     document.body.classList.add("light-mode");
+    // Update toggle button icon
     document.querySelector(".mode-toggle").textContent = "🌞";
   }
 }
 
-// Scroll animation
+// Scroll animation handler
 function checkVisibility(e) {
+  // Prevent default if event exists (for anchor tags)
   if (e) e.preventDefault();
 
+  // Get all sections and current viewport height
   const sections = document.querySelectorAll(".section");
   const windowHeight = window.innerHeight;
 
+  // Check visibility for each section
   sections.forEach((section) => {
+    // Get section's position relative to viewport
     const sectionTop = section.getBoundingClientRect().top;
 
+    // If section is in the visible area (75% of viewport height)
     if (sectionTop < windowHeight * 0.75) {
+      // Add visible class to trigger animations
       section.classList.add("visible");
     }
   });
 }
 
-// Initialize
+// Initialize application when DOM is loaded
 document.addEventListener("DOMContentLoaded", async function () {
+  // Apply saved theme
   checkTheme();
+  // Initial visibility check
   checkVisibility();
-  // Fetch data from db.json
+
+  // Fetch data from db.json and load routines/tips
   fetchDBData().then(async (data) => {
     await loadRoutine();
     await loadTips();
   });
 
-  // Set up event listeners
+  // Set up scroll event listener
   window.addEventListener("scroll", checkVisibility);
 
-  // Make functions available globally
+  // Expose functions to global scope
   window.submitQuiz = submitQuiz;
   window.scrollToProducts = scrollToProducts;
   window.addToRoutine = addToRoutine;
@@ -58,47 +81,53 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 // Quiz functionality
-let quizAnswers = {};
-let routineProducts = [];
-let allDbData = "";
+let quizAnswers = {}; // Stores user's quiz answers
+let routineProducts = []; // Stores products in user's routine
+let allDbData = ""; // Will store all database content
 
+// Set up quiz option click handlers
 document.querySelectorAll(".option").forEach((option) => {
   option.addEventListener("click", function () {
+    // Get question and selected value from data attributes
     const question = this.dataset.question;
     const value = this.dataset.value;
 
-    // Remove selected class from other options in the same question
+    // Remove selected class from all options in this question
     document
       .querySelectorAll(`[data-question="${question}"]`)
       .forEach((opt) => {
         opt.classList.remove("selected");
       });
 
-    // Add selected class to clicked option
+    // Mark clicked option as selected
     this.classList.add("selected");
 
-    // Store answer
+    // Store answer in quizAnswers object
     quizAnswers[question] = value;
   });
 });
 
+// Handle quiz submission
 async function submitQuiz() {
+  // Validate all questions were answered
   if (Object.keys(quizAnswers).length < 3) {
     alert("Please answer all questions before submitting.");
     return;
   }
 
-  // Show loading
+  // Show loading state
   const resultsElement = document.getElementById("quiz-results");
   resultsElement.classList.remove("hidden");
-  resultsElement.innerHTML = '<div class="loading"></div>'; // <== this part shows the loader
+  resultsElement.innerHTML = '<div class="loading"></div>';
 
-  // Simulate processing
+  // Generate product recommendations
   const results = generateRecommendations(quizAnswers);
   displayResults(results);
 
+  // Generate beauty tips based on answers
   const beautyTips = generateBeautyTips(quizAnswers);
 
+  // Save tips to server
   try {
     const response = await fetch(
       "https://skin-type-product-matcher-json-api.onrender.com/tips",
@@ -115,10 +144,13 @@ async function submitQuiz() {
     console.error("Error saving tips:", error);
   }
 
+  // Display the generated tips
   displayBeautyTips(beautyTips);
 }
 
+// Generate product recommendations based on quiz answers
 function generateRecommendations(answers) {
+  // Recommendation mapping by skin concern
   const recommendations = {
     acne: ["Gentle Green Cleanser", "Renewal Clay Mask"],
     dryness: ["Hydrating Botanical Serum", "Nourishing Day Moisturizer"],
@@ -126,6 +158,7 @@ function generateRecommendations(answers) {
     sensitivity: ["Gentle Green Cleanser", "Hydrating Botanical Serum"],
   };
 
+  // Return recommendations based on primary concern or default
   return (
     recommendations[answers["1"]] || [
       "Gentle Green Cleanser",
@@ -134,12 +167,17 @@ function generateRecommendations(answers) {
   );
 }
 
+// Generate personalized beauty tips
 function generateBeautyTips(answers) {
+  // Get primary concern from answers
   const primaryConcern = answers["1"];
+
+  // Find matching concern in database
   const matchedConcern = allDbData?.concerns.find((c) => {
     return c.type === primaryConcern;
   });
 
+  // Return default if no match found
   if (!matchedConcern) {
     return {
       recommendations: ["Gentle Green Cleanser", "Nourishing Day Moisturizer"],
@@ -153,7 +191,7 @@ function generateBeautyTips(answers) {
 
   console.log("concern");
   console.log(matchedConcern);
-
+  // Return matched concern data with formatted product names
   return {
     recommendations: matchedConcern.recommendations.map((rec) => ({
       id: rec,
@@ -174,32 +212,30 @@ function getProductDisplayName(productId) {
   return productNames[productId] || productId;
 }
 
+// Display quiz results to user
 function displayResults(products) {
   const resultsHtml = `
-            <div style="background: rgba(188, 216, 147, 0.1); padding: 2rem; border-radius: 15px; text-align: center;">
-                <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Your Personalized Recommendations</h3>
-                <p style="margin-bottom: 1.5rem;">Based on your quiz results, we recommend these products:</p>
-                <ul style="list-style: none; margin-bottom: 1.5rem;">
-                    ${products
-                      .map(
-                        (product) =>
-                          `<li style="padding: 0.5rem 0;">• ${product}</li>`
-                      )
-                      .join("")}
-                </ul>
-                <button onclick="scrollToProducts()" style="background: var(--color-medium); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 500;">
-                    View Products
-                </button>
-            </div>
-        `;
+    <div style="background: rgba(188, 216, 147, 0.1); padding: 2rem; border-radius: 15px; text-align: center;">
+      <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Your Personalized Recommendations</h3>
+      <p style="margin-bottom: 1.5rem;">Based on your quiz results, we recommend these products:</p>
+      <ul style="list-style: none; margin-bottom: 1.5rem;">
+        ${products
+          .map((product) => `<li style="padding: 0.5rem 0;">• ${product}</li>`)
+          .join("")}
+      </ul>
+      <button onclick="scrollToProducts()" style="background: var(--color-medium); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 500;">
+        View Products
+      </button>
+    </div>
+  `;
 
   document.getElementById("quiz-results").innerHTML = resultsHtml;
 }
 
+// Display beauty tips to user
 function displayBeautyTips(response) {
+  // Extract tips from response or default to empty array
   const tips = response?.tips || response?.tips || [];
-
-  console.log(tips);
 
   document.getElementById("tips").innerHTML = `
     <div style="background: rgba(188, 216, 147, 0.1); padding: 2rem; border-radius: 15px; text-align: center;">
@@ -231,6 +267,7 @@ function displayBeautyTips(response) {
   `;
 }
 
+// Smooth scroll to products section
 function scrollToProducts() {
   document.getElementById("products").scrollIntoView({
     behavior: "smooth",
@@ -238,9 +275,12 @@ function scrollToProducts() {
   });
 }
 
+// Add product to user's routine
 async function addToRoutine(button) {
+  // Get product card element
   const productCard = button.closest(".product-card");
 
+  // Extract product data
   const product = {
     productId: productCard.dataset.product,
     name: productCard.querySelector(".product-name").textContent,
@@ -250,13 +290,14 @@ async function addToRoutine(button) {
     emoji: productCard.querySelector(".product-image").textContent,
   };
 
-  // Check if product already exists in routine
+  // Check for duplicate products
   const exists = routineProducts.some((p) => p.productId === product.productId);
   if (exists) {
     alert("This product is already in your routine!");
     return;
   }
 
+  // Save to server
   try {
     const response = await fetch(
       "https://skin-type-product-matcher-json-api.onrender.com/routines",
@@ -279,20 +320,17 @@ async function addToRoutine(button) {
     console.error("Error saving routine:", error);
   }
 
-  // Update the routine display
-  // updateRoutineDisplay();
-
   // Update button state
   button.textContent = "Added!";
   button.disabled = true;
 }
 
+// Update the routine display
 function updateRoutineDisplay(productsArray) {
-  console.log("productsArray");
-  console.log(productsArray);
   const routineList = document.getElementById("routine-list");
   const productsToDisplay = productsArray || routineProducts;
 
+  // Handle empty routine
   if (productsToDisplay.length === 0) {
     routineList.innerHTML = `
       <p style="text-align: center; opacity: 0.7; font-style: italic">
@@ -325,11 +363,10 @@ function updateRoutineDisplay(productsArray) {
     )
     .join("");
 
-  // Add event listeners for remove buttons
+  // Add remove button handlers
   routineList.querySelectorAll(".remove-from-routine").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.closest(".routine-product").dataset.productId;
-
       removeFromRoutine(productId).then((r) => {
         deleteFromServer(productId).then((r) => console.log(r));
       });
@@ -337,24 +374,23 @@ function updateRoutineDisplay(productsArray) {
   });
 }
 
+// Remove product from routine
 async function removeFromRoutine(productId) {
   try {
+    // Filter out the removed product
     routineProducts = routineProducts.filter((product) => {
       return product.id != productId;
     });
     updateRoutineDisplay();
 
+    // Delete from server
     await deleteFromServer(productId);
 
+    // Reset add button for this product
     const allProductCards = document.querySelectorAll(".product-card");
-
-    console.log("::::::allProductCards");
-    console.log(allProductCards);
     allProductCards.forEach((card) => {
       if (card.dataset.product == productId) {
         const addButton = card.querySelector(".add-to-routine");
-        console.log(":::::::addButton");
-        console.log(addButton);
         if (addButton) {
           addButton.textContent = "Add to Routine";
           addButton.disabled = false;
@@ -363,11 +399,12 @@ async function removeFromRoutine(productId) {
     });
   } catch (error) {
     console.error("Error removing product:", error);
-    // Revert UI if needed
+    // Revert to server state if error occurs
     loadRoutine();
   }
 }
 
+// Fetch all data from local db.json
 async function fetchDBData() {
   try {
     const response = await fetch("db.json");
@@ -382,6 +419,7 @@ async function fetchDBData() {
   }
 }
 
+// Load user's routine from server
 async function loadRoutine() {
   try {
     const response = await fetch(
@@ -395,22 +433,20 @@ async function loadRoutine() {
   }
 }
 
+// Load beauty tips from server
 async function loadTips() {
   try {
     const response = await fetch(
       "https://skin-type-product-matcher-json-api.onrender.com/tips"
     );
-    console.log(response);
-
     const savedTips = await response.json();
-    console.log(savedTips);
-
-    displayBeautyTips(savedTips); // Use savedTips, not raw response
+    displayBeautyTips(savedTips);
   } catch (error) {
     console.error("Error loading tips:", error);
   }
 }
 
+// Delete product from server
 async function deleteFromServer(productId) {
   await fetch(
     `https://skin-type-product-matcher-json-api.onrender.com/routines/${productId}`,
@@ -421,7 +457,7 @@ async function deleteFromServer(productId) {
   await loadRoutineFromServer();
 }
 
-// Case 2: Fetched from json-server
+// Load routine from server and update display
 async function loadRoutineFromServer() {
   const response = await fetch(
     "https://skin-type-product-matcher-json-api.onrender.com/routines"

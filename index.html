@@ -1,49 +1,81 @@
 <!DOCTYPE html>
+<!-- Declares HTML5 document type -->
 <html lang="en">
+  <!-- Root element with English language setting -->
   <head>
+    <!-- Document metadata and resources -->
     <meta charset="UTF-8" />
+    <!-- Sets character encoding to UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Ensures responsive design on mobile devices -->
     <title>Skin Care</title>
+    <!-- Page title shown in browser tab -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Links to external CSS stylesheet -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Imports Google Fonts for typography -->
   </head>
   <body>
+    <!-- Main content of the webpage -->
     <header>
+      <!-- Site header section -->
       <nav>
+        <!-- Navigation bar -->
         <div class="logo">GlowUp!</div>
+        <!-- Brand logo/name -->
         <ul class="nav-links">
+          <!-- Navigation links list -->
           <li><a href="#quiz">Skin Quiz</a></li>
+          <!-- Link to quiz section -->
           <li><a href="#products">Products</a></li>
+          <!-- Link to products section -->
           <li><a href="#routine">My Routine</a></li>
+          <!-- Link to routine section -->
           <li><a href="#tips">Tips</a></li>
+          <!-- Link to tips section -->
         </ul>
         <button class="login-btn">Login</button>
+        <!-- Login button -->
       </nav>
     </header>
 
+    <!-- Dark/light mode toggle button -->
     <button class="mode-toggle" onclick="toggleMode()">🌙</button>
 
     <main>
+      <!-- Main content area -->
       <div class="container">
+        <!-- Container for centered content -->
         <section class="hero">
+          <!-- Hero banner section -->
           <h1>Discover Your Perfect Skincare</h1>
+          <!-- Main headline -->
           <p>
+            <!-- Hero description text -->
             Natural, sustainable skincare solutions tailored to your unique skin
             needs. Experience the power of right products for your skin with our
             personalized approach.
           </p>
         </section>
 
+        <!-- Skin Quiz Section -->
         <section id="quiz" class="section">
+          <!-- Quiz section with ID for navigation -->
           <h2>Personalized Skin Quiz</h2>
+          <!-- Section heading -->
           <div class="quiz-container">
+            <!-- Container for quiz questions -->
             <div class="question">
+              <!-- First question block -->
               <h3>What's your primary skin concern?</h3>
+              <!-- Question text -->
               <div class="question-options">
+                <!-- Answer options container -->
                 <button class="option" data-question="1" data-value="acne">
+                  <!-- Option button with data attributes -->
                   Acne & Breakouts
                 </button>
                 <button class="option" data-question="1" data-value="dryness">
@@ -63,6 +95,7 @@
             </div>
 
             <div class="question">
+              <!-- Second question block -->
               <h3>How would you describe your skin type?</h3>
               <div class="question-options">
                 <button class="option" data-question="2" data-value="oily">
@@ -85,6 +118,7 @@
             </div>
 
             <div class="question">
+              <!-- Third question block -->
               <h3>What's your current skincare routine like?</h3>
               <div class="question-options">
                 <button class="option" data-question="3" data-value="minimal">
@@ -102,37 +136,54 @@
               </div>
             </div>
 
+            <!-- Quiz submission button -->
             <button class="quiz-submit" onclick="submitQuiz()">
               Get My Recommendations
             </button>
           </div>
 
+          <!-- Quiz results container (initially hidden) -->
           <div id="quiz-results" class="hidden">
             <div class="loading"></div>
+            <!-- Loading spinner placeholder -->
           </div>
         </section>
 
+        <!-- Products Section -->
         <section id="products" class="section">
+          <!-- Products section with ID for navigation -->
           <h2>Our Green Collection</h2>
+          <!-- Section heading -->
           <div class="products-grid">
+            <!-- Grid container for product cards -->
+
+            <!-- Product Card 1: Cleanser -->
             <div class="product-card" data-product="gentle-cleanser">
+              <!-- Product card with data attribute -->
               <div class="product-image">
+                <!-- Product image container -->
                 <img
                   src="./assets/Farmacy_GreenCleanWhippedFoamingCleanser_150ml_Hero-removebg-preview.png"
                   alt=""
                 />
+                <!-- Product image -->
               </div>
               <div class="product-info">
+                <!-- Product details container -->
                 <h3 class="product-name">Gentle Green Cleanser</h3>
+                <!-- Product name -->
                 <p class="product-ingredients">
+                  <!-- Ingredients list -->
                   Aloe Vera, Green Tea, Chamomile
                 </p>
                 <button class="add-to-routine" onclick="addToRoutine(this)">
+                  <!-- Add to routine button -->
                   Add to Routine
                 </button>
               </div>
             </div>
 
+            <!-- Product Card 2: Serum -->
             <div class="product-card" data-product="hydrating-serum">
               <div class="product-image">
                 <img
@@ -151,6 +202,7 @@
               </div>
             </div>
 
+            <!-- Product Card 3: Moisturizer -->
             <div class="product-card" data-product="nourishing-moisturizer">
               <div class="product-image">
                 <img
@@ -169,6 +221,7 @@
               </div>
             </div>
 
+            <!-- Product Card 4: Mask -->
             <div class="product-card" data-product="renewal-mask">
               <div class="product-image">
                 <img src="./assets/IMG_4093-removebg-preview.png" alt="" />
@@ -184,6 +237,7 @@
               </div>
             </div>
 
+            <!-- Product Card 5: Toner -->
             <div class="product-card" data-product="balancing-toner">
               <div class="product-image">
                 <img src="./assets/36285-removebg-preview.png" alt="" />
@@ -201,27 +255,40 @@
           </div>
         </section>
 
+        <!-- Routine Section -->
         <section id="routine" class="section">
+          <!-- Routine section with ID for navigation -->
           <h2>My Skincare Routine</h2>
+          <!-- Section heading -->
           <div class="routine-container">
+            <!-- Routine container -->
             <div id="routine-list">
+              <!-- Dynamic routine list container -->
               <p style="text-align: center; opacity: 0.7; font-style: italic">
+                <!-- Placeholder text -->
                 Your routine will appear here as you add products
               </p>
             </div>
           </div>
         </section>
 
+        <!-- Tips Section -->
         <section id="tips" class="section">
+          <!-- Tips section with ID for navigation -->
           <h2>Green Beauty Tips</h2>
+          <!-- Section heading -->
           <div class="skin-tips">
+            <!-- Tips container -->
             <ul class="tips-list">
+              <!-- Tips list -->
               <li>Complete the Quiz to generate Tips for you</li>
+              <!-- Default tip -->
             </ul>
           </div>
         </section>
       </div>
     </main>
+    <!-- Links to external JavaScript file with defer attribute -->
     <script src="script.js" defer></script>
   </body>
 </html>
